@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "rapidFix",
+			"path": "../.."
+		},
+		{
+			"name": "exploded_car",
+			"path": "../../../exploded_car"
+		}
+	],
+	"settings": {}
+}
