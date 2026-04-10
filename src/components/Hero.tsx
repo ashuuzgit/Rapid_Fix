@@ -84,7 +84,7 @@ export default function Hero() {
         <span className="text-xs font-semibold uppercase tracking-widest text-primary/70">
           Scroll Down
         </span>
-        <motion.div
+        <motion.div 
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
         >
