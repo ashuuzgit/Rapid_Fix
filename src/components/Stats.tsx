@@ -36,7 +36,7 @@ export default function Stats() {
           
           <div className="flex flex-col items-center justify-center text-center">
             <h3 className="text-4xl md:text-5xl font-black mb-2">
-              <Counter value={5000} suffix="+" />
+              <Counter value={10000} suffix="+" />
             </h3>
             <p className="text-sm md:text-base font-bold uppercase tracking-wider opacity-80">Cars Serviced</p>
           </div>

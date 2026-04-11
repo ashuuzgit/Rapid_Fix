@@ -34,6 +34,10 @@ const itemVariants: Variants = {
 
 export default function Services() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [selectedService, setSelectedService] = useState<number | null>(null);
+
+  const openService = (index: number) => setSelectedService(index);
+  const closeService = () => setSelectedService(null);
 
   return (
     <section id="services" className="w-full bg-[#111111] py-24 md:py-32 px-6">
@@ -64,7 +68,7 @@ export default function Services() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 group/grid"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-0 md:gap-6 group/grid"
           onMouseLeave={() => setHoveredIndex(null)}
         >
           {SERVICES.map((service, i) => {
@@ -79,13 +83,14 @@ export default function Services() {
                 key={i}
                 variants={itemVariants}
                 onMouseEnter={() => setHoveredIndex(i)}
+                onClick={() => openService(i)}
                 whileHover={{ 
                   y: -6, 
                   borderColor: "rgba(245,245,245,0.5)",
                   transition: { type: "spring", stiffness: 300, damping: 20 }
                 }}
                 className={cn(
-                  "group relative flex flex-col bg-[#1A1A1A] p-6 rounded-xl border border-[rgba(245,245,245,0.12)] cursor-pointer transition-all duration-500",
+                  "group relative flex flex-col bg-transparent p-0 rounded-none border-b border-[rgba(245,245,245,0.08)] pb-4 transition-all duration-500 sm:bg-[#1A1A1A] sm:p-6 sm:rounded-xl sm:border sm:border-[rgba(245,245,245,0.12)] sm:border-b-0 sm:pb-0",
                   isOtherHovered ? "blur-[2px] opacity-50 scale-[0.98]" : "opacity-100 scale-100"
                 )}
               >
@@ -93,7 +98,7 @@ export default function Services() {
                   <Icon className="h-6 w-6" />
                 </div>
                 <h3 className="text-lg font-bold text-white/95 mb-3">{service.name}</h3>
-                <p className="text-sm text-white/65 leading-relaxed flex-grow">{service.desc}</p>
+                <p className="hidden sm:block text-sm text-white/65 leading-relaxed flex-grow">{service.desc}</p>
                 <div className="mt-6 flex items-center gap-2 text-primary opacity-100 translate-x-0 md:opacity-0 md:-translate-x-4 md:group-hover:opacity-100 md:group-hover:translate-x-0 transition-all duration-300">
                   <span className="text-sm font-bold">Learn More</span>
                   <ArrowRight className="h-4 w-4" />
@@ -102,6 +107,40 @@ export default function Services() {
             );
           })}
         </motion.div>
+
+        {selectedService !== null && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm px-4 py-10">
+            <div className="absolute inset-0" onClick={closeService} />
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="relative w-full max-w-2xl rounded-[28px] border border-[rgba(245,245,245,0.12)] bg-[#1A1A1A] p-8 shadow-2xl"
+            >
+              <button
+                type="button"
+                onClick={closeService}
+                className="absolute right-4 top-4 rounded-full bg-white/10 px-3 py-2 text-sm font-semibold text-white/80 transition hover:bg-white/15"
+              >
+               X
+              </button>
+              <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-black text-primary border border-primary/10">
+                {(() => {
+                  const ServiceIcon = SERVICES[selectedService].icon;
+                  return <ServiceIcon className="h-6 w-6" />;
+                })()}
+              </div>
+              <h3 className="text-2xl font-black text-white/95 mb-3">{SERVICES[selectedService].name}</h3>
+              <p className="text-sm text-white/65 leading-relaxed mb-6">
+                {SERVICES[selectedService].desc}
+              </p>
+              <div className="rounded-3xl border border-white/10 bg-black/50 p-6 text-sm text-white/70">
+                <p>
+                  Our team delivers premium service with a focus on precision and care. Tap any service card again to close this detail view.
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        )}
       </div>
     </section>
   );

@@ -87,7 +87,7 @@ export function LetterSwapForward({
 
   return (
     <span
-      className={`flex justify-center items-center relative overflow-hidden ${className}`}
+      className={`flex flex-wrap justify-center items-center relative overflow-visible text-center ${className}`}
       onMouseEnter={hoverStart}
       onTouchStart={hoverStart}
       onClick={onClick}
@@ -96,22 +96,28 @@ export function LetterSwapForward({
     >
       <span className="sr-only">{label}</span>
 
-      {label.split("").map((letter: string, i: number) => {
-        return (
-          <span className="whitespace-pre relative flex" key={i}>
-            <motion.span className={`relative letter`} style={{ top: 0 }}>
-              {letter}
-            </motion.span>
-            <motion.span
-              className="absolute letter-secondary"
-              aria-hidden={true}
-              style={{ top: reverse ? "-100%" : "100%" }}
+      {label.split(" ").map((word: string, wordIndex: number) => (
+        <span key={wordIndex} className="inline-flex flex-nowrap items-center whitespace-nowrap">
+          {word.split("").map((letter: string, i: number) => (
+            <span
+              className="whitespace-pre relative inline-flex overflow-hidden h-[1.1em] items-center justify-center text-center"
+              key={i}
             >
-              {letter}
-            </motion.span>
-          </span>
-        )
-      })}
+              <motion.span className="relative letter inline-block" style={{ top: 0 }}>
+                {letter}
+              </motion.span>
+              <motion.span
+                className="absolute letter-secondary left-0"
+                aria-hidden={true}
+                style={{ top: reverse ? "-100%" : "100%" }}
+              >
+                {letter}
+              </motion.span>
+            </span>
+          ))}
+          {wordIndex !== label.split(" ").length - 1 && <span className="w-3" aria-hidden="true" />}
+        </span>
+      ))}
     </span>
   )
 }
@@ -189,7 +195,7 @@ export function LetterSwapPingPong({
 
   return (
     <motion.span
-      className={`flex justify-center items-center relative overflow-hidden ${className}`}
+      className={`flex flex-wrap justify-center items-center relative overflow-visible text-center ${className}`}
       onHoverStart={hoverStart}
       onHoverEnd={hoverEnd}
       onTapStart={hoverStart}
@@ -201,22 +207,28 @@ export function LetterSwapPingPong({
     >
       <span className="sr-only">{label}</span>
 
-      {label.split("").map((letter: string, i: number) => {
-        return (
-          <span className="whitespace-pre relative flex" key={i}>
-            <motion.span className={`relative letter`} style={{ top: 0 }}>
-              {letter}
-            </motion.span>
-            <motion.span
-              className="absolute letter-secondary"
-              aria-hidden={true}
-              style={{ top: reverse ? "-100%" : "100%" }}
+      {label.split(" ").map((word: string, wordIndex: number) => (
+        <span key={wordIndex} className="inline-flex flex-nowrap items-center whitespace-nowrap">
+          {word.split("").map((letter: string, i: number) => (
+            <span
+              className="whitespace-pre relative inline-flex overflow-hidden h-[1.1em] items-center justify-center text-center"
+              key={i}
             >
-              {letter}
-            </motion.span>
-          </span>
-        )
-      })}
+              <motion.span className="relative letter inline-block" style={{ top: 0 }}>
+                {letter}
+              </motion.span>
+              <motion.span
+                className="absolute letter-secondary left-0"
+                aria-hidden={true}
+                style={{ top: reverse ? "-100%" : "100%" }}
+              >
+                {letter}
+              </motion.span>
+            </span>
+          ))}
+          {wordIndex !== label.split(" ").length - 1 && <span className="w-3" aria-hidden="true" />}
+        </span>
+      ))}
     </motion.span>
   )
 }
