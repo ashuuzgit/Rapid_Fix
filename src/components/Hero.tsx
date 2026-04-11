@@ -7,7 +7,7 @@ import { LetterSwapPingPong } from "./LetterSwap";
 
 export default function Hero() {
   return (
-    <section className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden">
+    <section className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-visible">
       {/* Background Gradient & Dotted Surface */}
       <div className="absolute inset-0 bg-[#0A0A0A] z-0" />
       <DottedSurface className="opacity-60" />
@@ -31,9 +31,9 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          className="mb-6 text-3xl font-black tracking-tighter min-[400px]:text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-white/95 flex flex-col items-center gap-2 md:gap-4 w-full"
+          className="mb-6 text-4xl font-black tracking-tighter min-[400px]:text-5xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-white/95 flex flex-col items-center gap-2 md:gap-4 w-full"
         >
-          <LetterSwapPingPong label="Your Car Deserves" className="flex-wrap justify-center text-center" />
+          <LetterSwapPingPong label="Your Car & Bike Deserves" className="flex-wrap justify-center text-center" />
           <LetterSwapPingPong label="RAPID FIX." className="text-primary tracking-tight flex-wrap justify-center text-center" />
         </motion.div>
 
