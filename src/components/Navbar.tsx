@@ -29,14 +29,16 @@ export default function Navbar() {
     <motion.header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 flex h-16 items-center transition-colors duration-300",
-        isScrolled ? "bg-[rgba(10,10,10,0.80)] backdrop-blur-md border-b border-white/5" : "bg-transparent",
-        isMobileMenuOpen && "bg- [#0A0A0A] border-b border-white/5"
+        isScrolled
+          ? "bg-[rgba(10,10,10,0.80)] backdrop-blur-md border-b border-white/5"
+          : "bg-transparent",
+        isMobileMenuOpen && "bg- [#0A0A0A] border-b border-white/5",
       )}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
     >
-      <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-6">
+      <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-2">
         {/* Left: Logo */}
         <Link
           href="/"
@@ -64,7 +66,9 @@ export default function Navbar() {
               onMouseLeave={() => setHoveredLink(null)}
               onClick={(e) => {
                 e.preventDefault();
-                document.querySelector(link.href)?.scrollIntoView({ behavior: "auto" });
+                document
+                  .querySelector(link.href)
+                  ?.scrollIntoView({ behavior: "auto" });
               }}
             >
               {link.name}
@@ -89,23 +93,34 @@ export default function Navbar() {
           >
             Admin
           </Link>
-          
+
           <motion.button
             className="flex items-center gap-1.5 rounded-full bg-danger px-3 py-1.5 text-xs font-bold text-white shadow-lg"
             animate={{
-              boxShadow: ["0 0 0px #FF3B3B", "0 0 14px #FF3B3B", "0 0 0px #FF3B3B"],
+              boxShadow: [
+                "0 0 0px #FF3B3B",
+                "0 0 14px #FF3B3B",
+                "0 0 0px #FF3B3B",
+              ],
             }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           >
             🚨 SOS
           </motion.button>
-          
+
           <motion.button
-            whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(245,245,245,0.4)" }}
+            whileHover={{
+              scale: 1.05,
+              boxShadow: "0 0 20px rgba(245,245,245,0.4)",
+            }}
             whileTap={{ scale: 0.95 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
             className="hidden md:block rounded-full bg-primary px-5 py-2 text-sm font-bold text-black"
-            onClick={() => document.querySelector("#assembly")?.scrollIntoView({ behavior: "smooth" })}
+            onClick={() =>
+              document
+                .querySelector("#assembly")
+                ?.scrollIntoView({ behavior: "smooth" })
+            }
           >
             Book Now
           </motion.button>
@@ -115,7 +130,11 @@ export default function Navbar() {
             className="md:hidden p-1 text-white/80 hover:text-white transition-colors"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
-            {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            {isMobileMenuOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
           </button>
         </div>
       </div>
@@ -137,7 +156,9 @@ export default function Navbar() {
                 onClick={(e) => {
                   e.preventDefault();
                   setIsMobileMenuOpen(false);
-                  document.querySelector(link.href)?.scrollIntoView({ behavior: "auto" });
+                  document
+                    .querySelector(link.href)
+                    ?.scrollIntoView({ behavior: "auto" });
                 }}
               >
                 {link.name}
@@ -155,7 +176,9 @@ export default function Navbar() {
               className="mt-6 w-full rounded-full bg-primary px-5 py-3 text-sm font-bold text-black shadow-[0_0_20px_rgba(245,245,245,0.3)]"
               onClick={() => {
                 setIsMobileMenuOpen(false);
-                document.querySelector("#assembly")?.scrollIntoView({ behavior: "smooth" });
+                document
+                  .querySelector("#assembly")
+                  ?.scrollIntoView({ behavior: "smooth" });
               }}
             >
               Book Now
