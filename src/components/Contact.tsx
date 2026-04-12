@@ -15,7 +15,7 @@ export default function Contact() {
 
             <div className="flex flex-col gap-8 mb-12">
               <div className="flex items-start gap-4">
-                <MapPin className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
+                <MapPin className="h-6 w-6 text-primary shrink-0 mt-1" />
                 <div>
                   <h4 className="text-lg font-bold text-white/95 mb-1">Rapid Fix Repair</h4>
                   <p className="text-white/65 leading-relaxed text-base">
@@ -25,14 +25,14 @@ export default function Contact() {
               </div>
 
               <div className="flex items-center gap-4">
-                <Phone className="h-6 w-6 text-primary flex-shrink-0" />
+                <Phone className="h-6 w-6 text-primary shrink-0" />
                 <a href="tel:+15550123456" className="text-lg font-bold text-white/90 hover:text-primary transition-colors">
                   +91 999 012-3456
                 </a>
               </div>
 
               <div className="flex items-center gap-4">
-                <Mail className="h-6 w-6 text-primary flex-shrink-0" />
+                <Mail className="h-6 w-6 text-primary shrink-0" />
                 <a href="mailto:service@apexauto.com" className="text-lg font-bold text-white/90 hover:text-primary transition-colors">
                   service@rapidfix.com
                 </a>

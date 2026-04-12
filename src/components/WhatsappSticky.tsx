@@ -1,28 +1,21 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle } from "lucide-react";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 
 export default function WhatsappSticky() {
-  const [isVisible, setIsVisible] = useState(false); // Start hidden until mounted
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Show by default on mount
     setIsVisible(true);
 
     const contactSection = document.getElementById("contact");
     if (!contactSection) return;
 
     const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          setIsVisible(false); // Hide when contact section is visible
-        } else {
-          setIsVisible(true); // Show otherwise
-        }
-      },
-      { threshold: 0.1 }
+      ([entry]) => setIsVisible(!entry.isIntersecting),
+      { threshold: 0.15 },
     );
 
     observer.observe(contactSection);
@@ -33,18 +26,41 @@ export default function WhatsappSticky() {
     <AnimatePresence>
       {isVisible && (
         <motion.a
-          href="https://wa.me/15550123456"
           target="_blank"
           rel="noreferrer"
-          initial={{ opacity: 0, scale: 0.5, y: 50 }}
+          aria-label="Chat on WhatsApp"
+          initial={{ opacity: 0, scale: 0.6, y: 40 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.5, y: 50 }}
-          whileHover={{ scale: 1.1, boxShadow: "0 0 20px rgba(37,211,102,0.6)" }}
+          exit={{ opacity: 0, scale: 0.6, y: 40 }}
+          whileHover={{
+            scale: 1.08,
+            boxShadow: "0 0 25px rgba(37,211,102,0.5)",
+          }}
           whileTap={{ scale: 0.9 }}
-          transition={{ type: "spring", stiffness: 400, damping: 10 }}
-          className="fixed bottom-6 right-6 z-[100] flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg md:bottom-8 md:right-8"
+          transition={{ type: "spring", stiffness: 300, damping: 18 }}
+          className="
+            fixed z-[100]
+            flex items-center justify-center
+            rounded-full shadow-lg bg-white
+            
+            h-12 w-12 sm:h-14 sm:w-14
+            
+            bottom-4 right-4 
+            sm:bottom-6 sm:right-10
+            md:bottom-8 md:right-14
+            md:rounded-6xl
+            mb-[env(safe-area-inset-bottom)]
+            mr-[env(safe-area-inset-right)]
+          "
         >
-          <MessageCircle className="h-7 w-7" />
+          <Image
+            src="/whatsapp.png"
+            alt="WhatsApp"
+            width={32}
+            height={32}
+            className="object-contain rounded-full h-48 w-48 bg-none"
+            unoptimized
+          />
         </motion.a>
       )}
     </AnimatePresence>
